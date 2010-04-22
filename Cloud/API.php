@@ -238,9 +238,7 @@ class Cloud_API
         curl_setopt($this->_ch, CURLOPT_FOLLOWLOCATION, true);
 
         // Add body
-        if ($body != null) {
-            curl_setopt($this->_ch, CURLOPT_POSTFIELDS, $body);
-        }
+        curl_setopt($this->_ch, CURLOPT_POSTFIELDS, $body);
 
         // Execute
         $response = curl_exec($this->_ch);
