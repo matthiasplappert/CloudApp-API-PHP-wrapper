@@ -99,7 +99,7 @@ class Cloud_API
      * @return string
      */
     public function getEmail() {
-        return $this->_email = $email;
+        return $this->_email;
     }
 
     /**
