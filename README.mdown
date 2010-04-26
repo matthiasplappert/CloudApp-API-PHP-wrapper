@@ -20,7 +20,13 @@ Usage Example
 
     // Get item (http://cl.ly/bD5)
     $item = $cloud->getItem('bD5');
-
+    
+    // Delete item (by object)
+    $cloud->deleteItem($item);
+    
+    // Delete item (by ID, the last part of the href value of an item)
+    $cloud->deleteItem('165175');
+    
     ?>
 
 Requirements
@@ -29,10 +35,12 @@ PHP5 and [cURL extension](http://php.net/manual/en/book.curl.php).
 
 License
 -------
-**Short:** Use it in any project, no matter if it is commercial or not. Just donâ€™t remove the copyright notice.
+**Short:** Use it in any project, no matter if it is commercial or not. Just donÕt remove the copyright notice.
 
 **MIT License**
+
 Copyright (c) 2010 <matthiasplappert@gmail.com>
+
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.

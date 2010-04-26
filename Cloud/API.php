@@ -237,9 +237,17 @@ class Cloud_API
     /**
      * Deletes a item. Authenticiation required.
      *
-     * @param string $id
+     * @param string|object $id
      */
-    public function deleteItem($id) {
+    public function deleteItem($id_or_object) {
+        if (is_object($id_or_object)) {
+            // Get id
+            $parts = explode("/", $id_or_object->href);
+            $id = $parts[count($parts) - 1];
+        } else {
+            $id = $id_or_object;
+        }
+
         $this->_execute('http://my.cl.ly/items/' . $id, null, 200, 'DELETE');
     }
 
