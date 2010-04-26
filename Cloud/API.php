@@ -20,11 +20,20 @@
 
 require_once 'Cloud/Exception.php';
 
+// Type definitions
+define('CLOUD_API_TYPE_ALL',      null);
+define('CLOUD_API_TYPE_BOOKMARK', 'bookmark');
+define('CLOUD_API_TYPE_VIDEO',    'video');
+define('CLOUD_API_TYPE_IMAGE',    'image');
+define('CLOUD_API_TYPE_TEXT',     'text');
+define('CLOUD_API_TYPE_ARCHIVE',  'archive');
+define('CLOUD_API_TYPE_AUDIO',    'audio');
+define('CLOUD_API_TYPE_OTHER',    'unknown');
+
 /**
  * Cloud_API is a simple PHP wrapper for the CloudApp API using cURL.
  *
  * @author Matthias Plappert
- * @version 1.0
  */
 class Cloud_API
 {
@@ -192,11 +201,27 @@ class Cloud_API
      * Returns all existing items. Requires authentication.
      *
      * @param int $page
-     * @param int $page_size
-     * @return object
+     * @param int $per_page
+     * @param string $type
+     * @param bool $deleted
+     * @return array
      */
-    public function getItems($page = 1, $page_size = 5) {
-        return $this->_execute('http://my.cl.ly/items?page=' . $page . '&page_size=' . $page_size);
+    public function getItems($page = 1, $per_page = 5, $type = CLOUD_API_TYPE_ALL, $deleted = false) {
+        $url = 'http://my.cl.ly/items?page=' . $page . '&per_page=' . $per_page;
+
+        if ($type !== CLOUD_API_TYPE_ALL) {
+            // Append type
+            $url .= '&type=' . $type;
+        }
+
+        // Append deleted
+        if ($deleted === true) {
+            $url .= '&deleted=true';
+        } else {
+            $url .= '&deleted=false';
+        }
+
+        return $this->_execute($url);
     }
 
     /**
@@ -212,10 +237,10 @@ class Cloud_API
     /**
      * Deletes a item. Authenticiation required.
      *
-     * @param string $url
+     * @param string $id
      */
-    public function deleteItem($url) {
-        $this->_execute('http://my.cl.ly/' . $url, null, 200, 'DELETE');
+    public function deleteItem($id) {
+        $this->_execute('http://my.cl.ly/items/' . $id, null, 200, 'DELETE');
     }
 
     private function _execute($api_url, $body = null, $expected_code = 200, $method = 'GET') {

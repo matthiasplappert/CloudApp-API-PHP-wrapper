@@ -28,7 +28,6 @@ define('CLOUD_EXCEPTION_INVALID_RESPONSE',  4);
  * Exception class used by Cloud_API.
  *
  * @author Matthias Plappert
- * @version 1.0
  */
 class Cloud_Exception extends Exception { }
 
