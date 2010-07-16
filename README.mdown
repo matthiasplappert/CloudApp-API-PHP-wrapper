@@ -35,7 +35,7 @@ PHP5 and [cURL extension](http://php.net/manual/en/book.curl.php).
 
 License
 -------
-**Short:** Use it in any project, no matter if it is commercial or not. Just don’t remove the copyright notice.
+**Short:** Use it in any project, no matter if it is commercial or not. Just don't remove the copyright notice.
 
 **MIT License**
 

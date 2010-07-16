@@ -191,7 +191,31 @@ class Cloud_API
             $body[$key] = $value;
         }
         $body['file'] = '@' . $path;
+
         $location = $this->_upload($s3->url, $body);
+
+        // Parse location
+        $query = parse_url($location, PHP_URL_QUERY);
+        $query_parts = explode('&', $query);
+        foreach ($query_parts as $part) {
+            $key_and_value = explode('=', $part, 2);
+            if (count($key_and_value) != 2) {
+                continue;
+            }
+
+            if ($key_and_value[0] != 'key') {
+                continue;
+            }
+
+            // Encode key value
+            $value = $key_and_value[1];
+            $encoded_value = urlencode($value);
+
+            // Replace decoded value with encoded one
+            $replace_string = $key_and_value[0] . '=' . $encoded_value;
+            $location = str_replace($part, $replace_string, $location);
+            break;
+        }
 
         // Get item
         return $this->_execute($location, null, 200);
@@ -302,6 +326,7 @@ class Cloud_API
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_NOBODY, false);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
 
         // Execute
         $response = curl_exec($ch);
