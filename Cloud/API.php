@@ -148,16 +148,22 @@ class Cloud_API
     }
 
     /**
-     * Creates a bookmark and returns the server response. Requires authentication.
+     * Creates a bookmark and returns the server response. Requires authentication. If $private equals null,
+     * the user’s default settings are used. Set $private to true or false to explicitly make it private or
+     * public. This might be useful if something is intended for Twitter sharing, for example.
      *
      * @param string $url
      * @param string $name
+     * @param bool|null $private
      * @return object
      */
-    public function addBookmark($url, $name = '') {
+    public function addBookmark($url, $name = '', $private = null) {
         // Create body and run it
-        $body = json_encode(array('item' => array('name' => $name, 'redirect_url' => $url)));
-        return $this->_execute('http://my.cl.ly/items', $body, 200, 'POST');
+        $body = array('item' => array('name' => $name, 'redirect_url' => $url));
+        if ($private !== null) {
+            $body['item']['private'] = $private === true ? 'true' : 'false';
+        }
+        return $this->_execute('http://my.cl.ly/items', json_encode($body), 200, 'POST');
     }
 
     /**
