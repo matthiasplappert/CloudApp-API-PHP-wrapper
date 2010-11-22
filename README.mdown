@@ -18,14 +18,14 @@ Usage Example
     // Get items
     $items = $cloud->getItems();
 
-    // Get item (http://cl.ly/bD5)
-    $item = $cloud->getItem('bD5');
+    // Get item
+    $item = $cloud->getItem('http://cl.ly/bD5');
     
     // Delete item (by object)
     $cloud->deleteItem($item);
     
-    // Delete item (by ID, the last part of the href value of an item)
-    $cloud->deleteItem('165175');
+    // Delete item (by href)
+    $cloud->deleteItem($item->href);
     
     ?>
 

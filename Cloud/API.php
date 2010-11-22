@@ -261,24 +261,21 @@ class Cloud_API
      * @return object
      */
     public function getItem($url) {
-        return $this->_execute('http://cl.ly/' . $url, null, 200, 'GET');
+        return $this->_execute($url, null, 200, 'GET');
     }
 
     /**
-     * Deletes a item. Authenticiation required.
+     * Deletes an item. Authenticiation required.
      *
-     * @param string|object $id
+     * @param string|object $href
      */
-    public function deleteItem($id_or_object) {
-        if (is_object($id_or_object)) {
-            // Get id
-            $parts = explode("/", $id_or_object->href);
-            $id = $parts[count($parts) - 1];
-        } else {
-            $id = $id_or_object;
+    public function deleteItem($href) {
+        if (is_object($href)) {
+            // Get href
+            $href = $href->href;
         }
 
-        $this->_execute('http://my.cl.ly/items/' . $id, null, 200, 'DELETE');
+        $this->_execute($href, null, 200, 'DELETE');
     }
 
     private function _execute($api_url, $body = null, $expected_code = 200, $method = 'GET') {
