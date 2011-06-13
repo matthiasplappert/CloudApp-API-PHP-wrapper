@@ -190,14 +190,11 @@ class Cloud_API
 
         // Request S3 data
         $s3 = $this->_execute('http://my.cl.ly/items/new');
-        if ($s3-> uploads_remaining < 1) {
-            throw new CloudException('Account has reached its maximum number of uploads for the day.', CLOUD_EXCEPTION_MAX_UPLOADS);
-        }
 
-		// Check if we can upload
-		if(isset($s3->num_remaining) && $s3->num_remaining < 1) {
-			throw new Cloud_Exception('Insufficient uploads remaining. Please consider upgrading to CloudApp Pro', CLOUD_EXCEPTION_PRO);
-		}
+        // Check if we can upload
+        if(isset($s3->num_remaining) && $s3->num_remaining < 1) {
+            throw new Cloud_Exception('Insufficient uploads remaining. Please consider upgrading to CloudApp Pro', CLOUD_EXCEPTION_PRO);
+        }
 
         // Create body and upload file
         $body = array();
