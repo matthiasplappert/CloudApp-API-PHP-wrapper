@@ -191,6 +191,11 @@ class Cloud_API
         // Request S3 data
         $s3 = $this->_execute('http://my.cl.ly/items/new');
 
+		// Check if we can upload
+		if(isset($s3->num_remaining) && $s3->num_remaining < 1) {
+			throw new Cloud_Exception('Insufficient uploads remaining. Please consider upgrading to CloudApp Pro', CLOUD_EXCEPTION_PRO);
+		}
+
         // Create body and upload file
         $body = array();
         foreach ($s3->params as $key => $value) {
