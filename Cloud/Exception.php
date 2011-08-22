@@ -23,6 +23,7 @@ define('CLOUD_EXCEPTION_FILE_NOT_READABLE', 1);
 define('CLOUD_EXCEPTION_FILE_NOT_FOUND',    2);
 define('CLOUD_EXCEPTION_FILE_INVALID',      3);
 define('CLOUD_EXCEPTION_INVALID_RESPONSE',  4);
+define('CLOUD_EXCEPTION_PRO',               5);
 
 /**
  * Exception class used by Cloud_API.
