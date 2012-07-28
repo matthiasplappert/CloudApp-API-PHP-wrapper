@@ -1,7 +1,11 @@
 {
   "name": "matthiasplappert/cloudapp-api",
+  "type": "library",
+  "description": "A PHP library to interact with the CloudApp API",
+  "license": "MIT",
   "require": {
-    "php": ">=5.3.0"
+    "php": ">=5.0.0",
+    "ext-curl": "*"
   }
 }
 
