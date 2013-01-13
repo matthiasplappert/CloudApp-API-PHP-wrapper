@@ -18,8 +18,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace CloudApp;
-use CloudApp\Cloud_Exception;
+namespace Cloud;
+use Cloud\Cloud_Exception;
 
 // Type definitions
 define('CLOUD_API_TYPE_ALL',      null);
