@@ -18,7 +18,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once 'Cloud/Exception.php';
+namespace CloudApp;
+use CloudApp\Exception;
 
 // Type definitions
 define('CLOUD_API_TYPE_ALL',      null);
