@@ -19,7 +19,7 @@
  */
 
 namespace CloudApp;
-use CloudApp\Exception;
+use CloudApp\Cloud_Exception;
 
 // Type definitions
 define('CLOUD_API_TYPE_ALL',      null);
