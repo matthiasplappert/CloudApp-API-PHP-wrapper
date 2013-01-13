@@ -31,6 +31,6 @@ define('CLOUD_EXCEPTION_PRO',               5);
  *
  * @author Matthias Plappert
  */
-class Cloud_Exception extends \Exception { }
+class Exception extends \Exception { }
 
 ?>
