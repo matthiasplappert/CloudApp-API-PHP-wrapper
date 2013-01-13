@@ -1,5 +1,5 @@
 {
-  "name": "dizda/cloudapp-api",
+  "name": "matthiasplappert/cloudapp-api",
   "type": "library",
   "description": "A PHP library to interact with the CloudApp API",
   "license": "MIT",
