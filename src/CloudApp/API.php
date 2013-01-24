@@ -18,7 +18,8 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once 'Cloud/Exception.php';
+namespace CloudApp;
+use CloudApp\Exception;
 
 // Type definitions
 define('CLOUD_API_TYPE_ALL',      null);
@@ -35,7 +36,7 @@ define('CLOUD_API_TYPE_OTHER',    'unknown');
  *
  * @author Matthias Plappert
  */
-class Cloud_API
+class API
 {
     /**
      * The email address of an user. Used for authentication.
@@ -175,17 +176,17 @@ class Cloud_API
     public function addFile($path) {
         // Check if file exists
         if (!file_exists($path)) {
-            throw new Cloud_Exception('File at path \'' . $path . '\' not found', CLOUD_EXCEPTION_FILE_NOT_FOUND);
+            throw new Exception('File at path \'' . $path . '\' not found', CLOUD_EXCEPTION_FILE_NOT_FOUND);
         }
 
         // Check if path points to a file
         if (!is_file($path)) {
-            throw new Cloud_Exception('Path \'' . $path . '\' doesn\'t point to a file', CLOUD_EXCEPTION_FILE_INVALID);
+            throw new Exception('Path \'' . $path . '\' doesn\'t point to a file', CLOUD_EXCEPTION_FILE_INVALID);
         }
 
         // Check if file is readable
         if (!is_readable($path)) {
-            throw new Cloud_Exception('File at path \'' . $path . '\' isn\'t readable', CLOUD_EXCEPTION_FILE_NOT_READABLE);
+            throw new Exception('File at path \'' . $path . '\' isn\'t readable', CLOUD_EXCEPTION_FILE_NOT_READABLE);
         }
 
         // Request S3 data
@@ -193,7 +194,7 @@ class Cloud_API
 
         // Check if we can upload
         if(isset($s3->num_remaining) && $s3->num_remaining < 1) {
-            throw new Cloud_Exception('Insufficient uploads remaining. Please consider upgrading to CloudApp Pro', CLOUD_EXCEPTION_PRO);
+            throw new Exception('Insufficient uploads remaining. Please consider upgrading to CloudApp Pro', CLOUD_EXCEPTION_PRO);
         }
 
         // Create body and upload file
@@ -311,7 +312,7 @@ class Cloud_API
         // Check for status code and close connection
         $status_code = curl_getinfo($this->_ch, CURLINFO_HTTP_CODE);
         if ($status_code != $expected_code) {
-            throw new Cloud_Exception('Invalid response. Expected HTTP status code \'' . $expected_code . '\' but received \'' . $status_code . '\'', CLOUD_EXCEPTION_INVALID_RESPONSE);
+            throw new Exception('Invalid response. Expected HTTP status code \'' . $expected_code . '\' but received \'' . $status_code . '\'', CLOUD_EXCEPTION_INVALID_RESPONSE);
         }
 
         // Decode JSON and return result
@@ -342,7 +343,7 @@ class Cloud_API
         // Check for status code and close connection
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($status_code != $expected_code) {
-            throw new Cloud_Exception('Invalid response. Expected HTTP status code \'' . $expected_code . '\' but received \'' . $status_code . '\'', CLOUD_EXCEPTION_INVALID_RESPONSE);
+            throw new Exception('Invalid response. Expected HTTP status code \'' . $expected_code . '\' but received \'' . $status_code . '\'', CLOUD_EXCEPTION_INVALID_RESPONSE);
         }
 
         // Close
@@ -354,7 +355,7 @@ class Cloud_API
             return trim(urldecode($matches[1]));
         } else {
             // Throw exception
-            throw new Cloud_Exception('Invalid response. Location header is missing.', CLOUD_EXCEPTION_INVALID_RESPONSE);
+            throw new Exception('Invalid response. Location header is missing.', CLOUD_EXCEPTION_INVALID_RESPONSE);
         }
     }
 }

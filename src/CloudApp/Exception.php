@@ -17,6 +17,7 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+namespace CloudApp;
 
 // Error codes
 define('CLOUD_EXCEPTION_FILE_NOT_READABLE', 1);
@@ -30,6 +31,6 @@ define('CLOUD_EXCEPTION_PRO',               5);
  *
  * @author Matthias Plappert
  */
-class Cloud_Exception extends Exception { }
+class Exception extends \Exception { }
 
 ?>

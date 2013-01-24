@@ -4,10 +4,14 @@ This PHP class allows you to easily access the CloudApp REST API. Visit the [Clo
 
 Usage Example
 -------------
-    <?php
-    require_once 'Cloud/API.php';
 
-    $cloud = new Cloud_API('Your email here', 'Your password here', 'Custom user agent here');
+```php
+<?php
+use CloudApp\API as CloudApp;
+
+class Test {
+
+    $cloud = new CloudApp('Your email here', 'Your password here', 'Custom user agent here');
 
     // Add a new bookmark
     $cloud->addBookmark('http://matthiasplappert.com/', 'matthiasplappert.com');
@@ -26,8 +30,9 @@ Usage Example
     
     // Delete item (by href)
     $cloud->deleteItem($item->href);
-    
-    ?>
+}
+?>
+```
 
 Requirements
 ------------
